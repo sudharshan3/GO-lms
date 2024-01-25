@@ -1,5 +1,5 @@
 - job:
-    name: new-test-jjb-35
+    name: new-test-jjb-100
     project-type: pipeline
     description: 'Go LMS Pipeline'
     properties:
