@@ -1,5 +1,6 @@
 import hudson.model.Hudson;
-
+def signature = 'new groovy.json.JsonSlurperClassic'
+org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval.get().approveSignature(signature)
 pipeline {
     agent any
 
@@ -30,31 +31,28 @@ pipeline {
         }
 
 
-        stage('Build and Run') {
-            steps {
-                script {
-                    // Navigate to the project directory
+        // stage('Build and Run') {
+        //     steps {
+        //         script {
+        //             // Navigate to the project directory
                   
-                        // Build the Go executable
-                        def port = params.PORT
-                        // bat "${GOROOT}\\bin\\go run main.go ${port}"
-                        bat "git clone https://github.com/sudharshan3/GO-lms.git && cd GO-lms"
-                        bat "dir"
-                        bat "cd ./GO-lms"
-                        bat "dir"
-                        bat "${GOROOT}\\bin\\go mod tidy"
-                        bat "${GOROOT}\\bin\\go build -o myapp.exe main.go"
+        //                 // Build the Go executable
+        //                 def port = params.PORT
+        //                 // bat "${GOROOT}\\bin\\go run main.go ${port}"
+        //                 bat "git clone https://github.com/sudharshan3/GO-lms.git && cd ./GO-lms && ${GOROOT}\\bin\\go mod tidy"
+        //                 bat "${GOROOT}\\bin\\go build -o ./GO-lms/myapp.exe ./GO-lms/main.go"
 
-                        // Run the executable
-                        bat "start myapp.exe ${port}"
+        //                 // Run the executable
+        //                 bat "start ./GO-lms/myapp.exe ${port}"
                     
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
             stage('Run Tests') {
             steps {
                 script {
-                   bat "${GOROOT}\\bin\\go test -v ./..."
+                    bat "rmdir /s /q GO-lms"
+                    bat "git clone https://github.com/sudharshan3/GO-lms.git && cd ./GO-lms && ${GOROOT}\\bin\\go mod tidy && ${GOROOT}\\bin\\go test -v ./..."
                 }
             }
         }
