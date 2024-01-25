@@ -51,7 +51,7 @@ pipeline {
             stage('Run Tests') {
             steps {
                 script {
-                    bat "rmdir /s /q GO-lms"
+                    bat "if exist GO-lms rmdir /s /q GO-lms"
                     bat "git clone https://github.com/sudharshan3/GO-lms.git && cd ./GO-lms && ${GOROOT}\\bin\\go mod tidy && ${GOROOT}\\bin\\go test -v ./..."
                 }
             }

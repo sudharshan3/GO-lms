@@ -7,6 +7,6 @@ pip install jenkins-job-builder
 jenkins-jobs --conf ./jenkins_jobs.ini update  ./go-lms-pipeline.yaml --delete-old
 curl -X POST -u "${user}":"${password}" \
   --data-urlencode json='{"parameter": [{"name":"PORT", "value":"3000"}]}' \
-  http://localhost:8080/job/new-test-jjb-105/build
+  http://localhost:8080/job/JJB-testrun-1002/build
 
 
